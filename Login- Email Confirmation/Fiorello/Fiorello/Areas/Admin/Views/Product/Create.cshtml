@@ -1,0 +1,38 @@
+﻿@model ProductCreateVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container my-5">
+    <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <div class="form-group my-3">
+            <input asp-for="Name" class="form-control" placeholder="Name"/>
+            <span class="text-danger d-block" asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <textarea asp-for="Description" class="form-control" placeholder="Description" ></textarea>
+            <span class="text-danger d-block" asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group my-3">
+            <input asp-for="Price" class="form-control" placeholder="Price" />
+            <span class="text-danger d-block" asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <select asp-for="CategoryId" asp-items="ViewBag.categories" class="form-control"></select>
+        </div>
+        <div class="form-group my-3">
+            <select asp-for="DiscountId" asp-items="ViewBag.discounts" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Images</label>
+            <input asp-for="Images" class="form-control"/>
+            <span class="text-danger d-block" asp-validation-for="Images"></span>
+        </div>
+        <button type="submit" class="btn btn-success btn-rounded btn-fw my-3">Submit</button>
+        <a asp-action="Index" class="btn btn-primary btn-rounded btn-fw">Back</a>
+    </form>
+</div>
+
+@section AdminScripts{
+    <partial name="_ValidationScriptsPartial" />
+}

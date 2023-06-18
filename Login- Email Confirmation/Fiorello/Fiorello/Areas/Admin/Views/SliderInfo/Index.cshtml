@@ -1,0 +1,59 @@
+﻿@model List<SliderInfoVM>
+
+@{
+    ViewData["Title"] = "SliderInfo";
+}
+
+<div class="container my-3">
+    <h2 class="text-center">Sliders</h2>
+    <div class="create-btn ">
+        <a asp-action="Create" class="btn btn-success btn-rounded btn-fw">Create</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Info
+                    </th>
+                    <th>
+                        Options
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var info in Model)
+                {
+                    <tr>
+                        <td class="py-1">
+                            <img src="~/img/@info.SignImage" alt="image" style="width:150px;height:75px;" />
+                        </td>
+                        <td>
+                            @Html.Raw(info.Title)
+                        </td>
+                        <td>
+                            @info.Info
+                        </td>
+                        <td class="d-flex flex-column">
+                            <a asp-action="Detail" asp-route-id="@info.Id" class="btn btn-primary btn-rounded btn-fw">Detail</a>
+                            <a asp-action="Update" asp-route-id="@info.Id" class="btn btn-warning btn-rounded btn-fw my-3">Edit</a>
+                            <form method="post" asp-action="Delete" asp-route-id="@info.Id" style="display:inline-block">
+                                <button type="submit" class="btn btn-inverse-danger btn-rounded btn-fw">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

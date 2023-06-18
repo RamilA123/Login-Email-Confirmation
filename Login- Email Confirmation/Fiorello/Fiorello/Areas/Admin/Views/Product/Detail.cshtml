@@ -1,0 +1,24 @@
+﻿@model ProductDetailVM
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container d-flex justify-content-center my-5">
+    <div class="images">
+        @foreach (var item in Model.Image)
+        {
+            <img src="~/img/@item" style="width:250px; height:300px" />
+        }
+    </div>
+    <div class="detail py-5" style="width:250px; height:300px; background-color:whitesmoke; text-align:center">
+        <p>Name: @Model.Name</p>
+        <p>Description: @Model.Description</p>
+        <p>CategoryName: @Model.CategoryName</p>
+        <p>CreateDate: @Model.CreateDate</p>
+        <p>Price: @Model.Price</p>
+        <p>Discount: @Model.Discount</p>
+        <a asp-action="Index" class="btn btn-primary btn-rounded btn-fw">Back</a>
+    </div>
+
+</div>
+

@@ -1,0 +1,71 @@
+﻿@model ProductEditVM
+
+<style>
+    .deactive{
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+    .active{
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        border: 1px solid black;
+        cursor: pointer;
+        background-color:greenyellow
+    }
+    
+</style>
+
+<div class="container">
+    <form method="post" asp-action="Update" enctype="multipart/form-data">
+        <div class="form-group my-3">
+            <input asp-for="Name" class="form-control" placeholder="Name" />
+            <span class="text-danger d-block" asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+            <span class="text-danger d-block" asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group my-3">
+            <input asp-for="Price" class="form-control" placeholder="Price" />
+            <span class="text-danger d-block" asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <select asp-for="CategoryId" asp-items="ViewBag.categories" class="form-control"></select>
+        </div>
+        <div class="form-group my-3">
+            <select asp-for="DiscountId" asp-items="ViewBag.discounts" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>NewImages</label>
+            <input asp-for="NewImage" class="form-control" />
+        </div>
+        <button asp-action="Update" type="submit" class="btn btn-success btn-rounded btn-fw my-3">Submit</button>
+        <a asp-action="Index" class="btn btn-primary btn-rounded btn-fw">Back</a>
+    </form>
+    <div class="images d-flex justify-content-between">
+        @foreach (var item in Model.Images)
+        {
+            <div style="border:1px solid black; margin-bottom:30px">
+                <img src="~/img/@item.Images" style="width:250px;height:300px;">
+                <div style="width:250px; height:50px;" class="d-flex justify-content-around">
+                    <a class="mt-2 @(item.IsMain ? "active" : "deactive")" ></a>
+                    @if (!item.IsMain)
+                    {
+                        <button data-id="@item.Id" id="delete" class=" d-flex justify-content-center align-items-center mt-2" style="width:35px; height:35px; border-radius:50px; background-color:red; color:black;font-size:24px; font-weight:bold;cursor:pointer">x</button>
+
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section AdminScripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/admin/js/product.js"></script>
+}
